@@ -1,0 +1,23 @@
+---
+title: "Workshop Instructions"
+subtitle: "Interactive Plots and Web Publishing with RMarkdown"
+author: "The GRAPH Courses Team"
+output: prettydoc::html_pretty
+---
+
+## Workshop Goal
+
+Our goal is to use R to replicate [this set of interactive tables and charts](https://ourworldindata.org/grapher/happiness-cantril-ladder){target="_blank"} from Our World in Data on life satisfaction.
+
+Our World in Data creates gold-standard visualizations and data analysis. They provide a wealth of data on global trends and long-term changes.
+
+## Getting Started
+
+- Fork, then clone this repository: [https://github.com/the-graph-courses/rmc_life_satisfaction_webpage](https://github.com/the-graph-courses/rmc_life_satisfaction_webpage){target="_blank"}.
+- Open the `index.Rmd` file. This file contains the skeleton for your assignment.
+- Follow the instructions to complete the "Table" and "Simple Chart" tabs.
+
+## Submission
+
+- When finished, render your HTML, push your changes to GitHub and enable GitHub Pages for the repository. 
+- Submit the link to the deployed website (the link will probably look something like this: `https://YOUR-USERNAME.github.io/NAME_OF_YOUR_REPO/`). Make sure it works before submitting.
