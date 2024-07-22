@@ -29,7 +29,7 @@ cantril <-
 
 # Self-reported life satisfaction, 2011 to 2022
 
-“Please imagine a ladder, with steps numbered from 0 at the bottom to 10 at the top. The top of the ladder represents the best possible life for you and the bottom of the ladder represents the worst possible life for you. On which step of the ladder would you say you personally feel you stand at this time?”
+The tabs below present statistics on the Cantril Life Ladder question: “Please imagine a ladder, with steps numbered from 0 at the bottom to 10 at the top. The top of the ladder represents the best possible life for you and the bottom of the ladder represents the worst possible life for you. On which step of the ladder would you say you personally feel you stand at this time?”
 
 # {.tabset}
 
@@ -37,11 +37,11 @@ cantril <-
 
 TABLE TO BE CREATED HERE
 
-```{r}
-# In this tab, you will need to create a table with the following columns: 
+```{r echo=T}
+# In this tab, you will create a table similar to the one on the Our World in Data page.
+# The table should have the following columns:
 # Country, `2011`, `2022`, Absolute change, and Relative change.
 
-# NEATER VERSION OF THE ABOVE INSTRUCTIONS
 # You should:
 # 1. Use `select` to drop the Code column from the `cantril` data as it is not needed in the table.
 # 2. Filter the `cantril` data frame to just the years 2011 and 2022.
@@ -78,9 +78,12 @@ cantril %>%
 
 CHART TO BE CREATED HERE 
 
-```{r}
-# In this tab, create a simple line chart of the Cantril score over time for a few countries.
-# You should follow these steps:
+```{r echo=T}
+# In this tab, create a simple line chart of the Cantril score over time for a few countries,
+# similar to the one on the Our World in Data page.
+# Note that your chart will not have the ability to filter countries like the one on the Our World in Data page.
+
+# You should:
 # 1. Filter the cantril data to just 4 to 8 countries you want to highlight
 # 2. Use ggplot to create a line chart of the Cantril score over time, with different colors for each country
 # 3. Use geom_line to create the lines
