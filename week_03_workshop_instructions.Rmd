@@ -11,13 +11,13 @@ In this workshop, you will work on replicating the **Our World in Data** Page on
 
 The goal is to use R to replicate [this set of interactive tables and charts](https://ourworldindata.org/grapher/happiness-cantril-ladder){target="_blank"} from Our World in Data on life satisfaction.
 
-You can find an example of the HTML page you will create for today's workshop here
+You can find an example of the HTML page you will create for today's workshop [here](https://the-graph-courses.github.io/rmc_life_satisfaction_webpage/)
 
 ## Getting Started
 
 Each individual will work on their own website page. This means that although you might work in a breakout room with other students, you will each perform the following steps:
 
-1.  Fork, then clone today's workshop repository to your local computer: \
+1.  Fork, then clone today's workshop repository to your local computer:\
     [https://github.com/the-graph-courses/rmc_life_satisfaction_webpage](https://github.com/the-graph-courses/rmc_life_satisfaction_webpage){target="_blank"}.
 2.  Open the `index.Rmd` file. This file contains the skeleton for your assignment.
 3.  Follow the instructions on this file to complete the **"Table"** and **"Simple Chart"** tabs.
@@ -39,7 +39,7 @@ For today's workshop, you will work on creating the **Table** and **Chart** tabs
 
 ## TASK 1: FORK AND CLONE THE REPO
 
-## TASK 2:  CREATE TABLE
+## TASK 2: CREATE TABLE
 
 In this tab, you will create a table similar to the one on the Our World in Data page. The table should have the following columns:
 
@@ -61,7 +61,7 @@ To accomplish this, you should:
 
 3.  Use the `pivot_wider` function to create the columns for 2011 and 2023.
 
-    **Hint:** You may need backticks around column names with spaces or which start with numbers.
+    **Hint:** You may need back-ticks around column names with spaces or which start with numbers.
 
 4.  Use the `mutate` function to calculate the Absolute change and Relative change.
 
@@ -71,7 +71,7 @@ To accomplish this, you should:
 
 7.  Use the `reactable` function to create and output the table.
 
-## TASK 3:  CREATE CHART
+## TASK 3: CREATE CHART
 
 In this tab, create a simple line chart of the *"Cantril Ladder"* score over time for a few countries, similar to the one on the Our World in Data page.
 
@@ -103,5 +103,5 @@ To accomplish this, you should:
 
 -   Submit the link to the deployed website as a **text file (.txt)**.
 -   **Make sure to test the link and double check that it works before submitting!**
--   The link will probably look something like this: \
+-   The link will probably look something like this:\
     `https://YOUR-USERNAME.github.io/NAME_OF_YOUR_REPO/`.
