@@ -13,7 +13,7 @@
 <meta name="author" content="The GRAPH Courses Team" />
 
 
-<title>Workshop Instructions</title>
+<title>Workshop 3 Instructions</title>
 
 <script>// Pandoc 2.9 adds attributes on both header and div. We remove the former (to
 // be compatible with the behavior of Pandoc < 2.8).
@@ -47,7 +47,7 @@ document.addEventListener('DOMContentLoaded', function(e) {
 
 
 <section class="page-header">
-<h1 class="title toc-ignore project-name">Workshop Instructions</h1>
+<h1 class="title toc-ignore project-name">Workshop 3 Instructions</h1>
 <h3 class="subtitle project-tagline">Interactive Plots and Web
 Publishing with RMarkdown</h3>
 <h4 class="author project-author">The GRAPH Courses Team</h4>
@@ -56,33 +56,123 @@ Publishing with RMarkdown</h3>
 
 
 <section class="main-content">
-<div id="workshop-goal" class="section level2">
-<h2>Workshop Goal</h2>
-<p>Our goal is to use R to replicate <a href="https://ourworldindata.org/grapher/happiness-cantril-ladder" target="_blank">this set of interactive tables and charts</a> from Our
+<div id="introduction" class="section level2">
+<h2>Introduction</h2>
+<p>In this workshop, you will work on replicating the <strong>Our World
+in Data</strong> Page on the Self-reported life satisfaction data from
+the <strong>Gallup World Poll</strong>. Our World in Data creates
+gold-standard visualizations and data analysis. They provide a wealth of
+data on global trends and long-term changes.</p>
+<p>The goal is to use R to replicate <a href="https://ourworldindata.org/grapher/happiness-cantril-ladder" target="_blank">this set of interactive tables and charts</a> from Our
 World in Data on life satisfaction.</p>
-<p>Our World in Data creates gold-standard visualizations and data
-analysis. They provide a wealth of data on global trends and long-term
-changes.</p>
+<p>You can find an example of the HTML page you will create for today’s
+workshop here</p>
 </div>
 <div id="getting-started" class="section level2">
 <h2>Getting Started</h2>
-<ul>
-<li>Fork, then clone this repository: <a href="https://github.com/the-graph-courses/rmc_life_satisfaction_webpage" target="_blank">https://github.com/the-graph-courses/rmc_life_satisfaction_webpage</a>.</li>
+<p>Each individual will work on their own website page. This means that
+although you might work in a breakout room with other students, you will
+each perform the following steps:</p>
+<ol style="list-style-type: decimal">
+<li>Fork, then clone today’s workshop repository to your local
+computer:<br />
+<a href="https://github.com/the-graph-courses/rmc_life_satisfaction_webpage" target="_blank">https://github.com/the-graph-courses/rmc_life_satisfaction_webpage</a>.</li>
 <li>Open the <code>index.Rmd</code> file. This file contains the
 skeleton for your assignment.</li>
-<li>Follow the instructions to complete the “Table” and “Simple Chart”
-tabs.</li>
+<li>Follow the instructions on this file to complete the
+<strong>“Table”</strong> and <strong>“Simple Chart”</strong> tabs.</li>
+<li>Submit the link to your deployed website on the Workshop 3
+Page!</li>
+</ol>
+</div>
+<div id="page-structure" class="section level2">
+<h2>Page Structure</h2>
+<p>Note that the example page is divided into <strong>4 major
+tabs</strong>:</p>
+<ol style="list-style-type: decimal">
+<li><p>Table</p></li>
+<li><p>Map</p></li>
+<li><p>Chart</p></li>
+<li><p>Advanced (Optional)</p></li>
+</ol>
+<p>For today’s workshop, you will work on creating the
+<strong>Table</strong> and <strong>Chart</strong> tabs of the page!</p>
+</div>
+<div id="task-1-fork-and-clone-the-repo" class="section level2">
+<h2>TASK 1: FORK AND CLONE THE REPO</h2>
+</div>
+<div id="task-2-create-table" class="section level2">
+<h2>TASK 2: CREATE TABLE</h2>
+<p>In this tab, you will create a table similar to the one on the Our
+World in Data page. The table should have the following columns:</p>
+<ul>
+<li><p>Country</p></li>
+<li><p><code>2011</code></p></li>
+<li><p><code>2023</code></p></li>
+<li><p>Absolute change</p></li>
+<li><p>Relative change</p></li>
 </ul>
+<p>To accomplish this, you should:</p>
+<ol style="list-style-type: decimal">
+<li><p>Use <code>select</code> to drop the Code column from the
+<code>cantril</code> data as it is not needed in the table.</p></li>
+<li><p>Filter the <code>cantril</code> data frame to just the years 2011
+and 2023.</p></li>
+<li><p>Use the <code>pivot_wider</code> function to create the columns
+for 2011 and 2023.</p>
+<p><strong>Hint:</strong> You may need backticks around column names
+with spaces or which start with numbers.</p></li>
+<li><p>Use the <code>mutate</code> function to calculate the Absolute
+change and Relative change.</p></li>
+<li><p>Also with <code>mutate</code>, you should round your numbers to
+appropriate decimal places.</p></li>
+<li><p>Then use scales::percent to format the Relative change as a
+percentage.</p></li>
+<li><p>Use the <code>reactable</code> function to create and output the
+table.</p></li>
+</ol>
+</div>
+<div id="task-3-create-chart" class="section level2">
+<h2>TASK 3: CREATE CHART</h2>
+<p>In this tab, create a simple line chart of the <em>“Cantril
+Ladder”</em> score over time for a few countries, similar to the one on
+the Our World in Data page.</p>
+<p><em>Note that your chart will not have the ability to filter
+countries like the one on the Our World in Data page.</em></p>
+<p>To accomplish this, you should:</p>
+<ol style="list-style-type: decimal">
+<li><p>Filter the <code>cantril</code> data to just <strong>4 to 8
+countries</strong> you want to highlight.</p></li>
+<li><p>Use <code>ggplot()</code> to create a <strong>line chart</strong>
+of the <em>“Cantril Ladder”</em> score over time, with different colors
+for each country</p></li>
+<li><p>Use <code>geom_line()</code> to create the lines</p></li>
+<li><p>Use <code>scale_y_continuous()</code> to set the y-axis limits to
+0 and 10.</p></li>
+<li><p>Use labs to create neat labels for the chart.</p></li>
+<li><p>Use theme_minimal to set the theme.</p></li>
+<li><p>Finally, use <code>ggplotly()</code> to convert the ggplot chart
+to a <code>plotly</code> chart.</p></li>
+</ol>
+</div>
+<div id="task-4-knit-your-rmd-into-html" class="section level2">
+<h2>TASK 4: KNIT YOUR RMD INTO HTML</h2>
+</div>
+<div id="task-5-push-changes-to-github" class="section level2">
+<h2>TASK 5: PUSH CHANGES TO GITHUB</h2>
+</div>
+<div id="task-6-deploy-to-github-pages" class="section level2">
+<h2>TASK 6: DEPLOY TO GITHUB PAGES</h2>
 </div>
 <div id="submission" class="section level2">
 <h2>Submission</h2>
 <ul>
-<li>When finished, render your HTML, push your changes to GitHub and
-enable GitHub Pages for the repository.</li>
-<li>Submit the link to the deployed website (the link will probably look
-something like this:
-<code>https://YOUR-USERNAME.github.io/NAME_OF_YOUR_REPO/</code>). Make
-sure it works before submitting.</li>
+<li>Submit the link to the deployed website as a <strong>text file
+(.txt)</strong>.</li>
+<li><strong>Make sure to test the link and double check that it works
+before submitting!</strong></li>
+<li>The link will probably look something like this:<br />
+<code>https://YOUR-USERNAME.github.io/NAME_OF_YOUR_REPO/</code>.</li>
 </ul>
 </div>
 </section>

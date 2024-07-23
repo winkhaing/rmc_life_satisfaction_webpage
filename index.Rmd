@@ -5,8 +5,16 @@ output:
     theme: united
 ---
 
-**GOAL**: Use R to replicate [this set of interactive tables and charts](https://ourworldindata.org/grapher/happiness-cantril-ladder){target="_blank"} from Our World in Data on life satisfaction across countries.
+<!-- Custom HTML to add logo -->
+<img src="Our_World_in_Data_logo.png" style='width: 100px; position:absolute; top:0; right:0; padding:10px;'/>
 
+<!-- Custom font and style of page -->
+<link href='https://fonts.googleapis.com/css?family=Playfair Display' rel='stylesheet'>
+<style>
+h1 {
+    font-family: Playfair Display, Georgia, Times New Roman, "Liberation Serif", serif;
+}
+</style>
 
 ```{r include = F}
 knitr::opts_chunk$set(echo = FALSE, message = FALSE, warning = FALSE)
@@ -16,9 +24,6 @@ if(!require(pacman)) install.packages("pacman")
 pacman::p_load(plotly, tidyverse, reactable, here, scales)
 ```
 
-<!-- Custom HTML to add logo -->
-<img src="Our_World_in_Data_logo.png" style='width: 100px; position:absolute; top:0; right:0; padding:10px;'/>
-
 ```{r}
 ## Import data
 cantril <- 
@@ -26,8 +31,9 @@ cantril <-
   rename(Country = Entity)
 ```
 
+# Self-reported life satisfaction, 2011 to 2023
 
-# Self-reported life satisfaction, 2011 to 2022
+Average of responses to the 'Cantril Ladder' question in the *Gallup World Poll*.
 
 The tabs below present statistics on the Cantril Life Ladder question: “Please imagine a ladder, with steps numbered from 0 at the bottom to 10 at the top. The top of the ladder represents the best possible life for you and the bottom of the ladder represents the worst possible life for you. On which step of the ladder would you say you personally feel you stand at this time?”
 
@@ -35,62 +41,61 @@ The tabs below present statistics on the Cantril Life Ladder question: “Please
 
 ## 🔢 Table
 
-TABLE TO BE CREATED HERE
-
 ```{r echo=T}
-# In this tab, you will create a table similar to the one on the Our World in Data page.
-# The table should have the following columns:
-# Country, `2011`, `2022`, Absolute change, and Relative change.
+# In this tab, you will create a table similar to the one on the Our World in Data page. The table should have the following columns:
+# Country, `2011`, `2023`, Absolute change, and Relative change.
 
-# You should:
-# 1. Use `select` to drop the Code column from the `cantril` data as it is not needed in the table.
-# 2. Filter the `cantril` data frame to just the years 2011 and 2022.
-# 3. Use the `pivot_wider` function to create the columns for 2011 and 2022.
-# (You may need backticks around column names with spaces or which start with numbers.)
-# 4. Use the `mutate` function to calculate the Absolute change and Relative change.
-# 5. Also with `mutate`, you should round your numbers to appropriate decimal places.
-# 6. Then use scales::percent to format the Relative change as a percentage.
-# 7. Use the `reactable` function to create and output the table.
+
+# Create table
+WRITE_YOUR_CODE_HERE
 ```
 
 
 ## 🌎 Map
 
 ```{r}
-# This code is already done for you. You don't need to change anything here. 
-# But if you change any of the column names, or something else with the data,
-# you may need to adjust the code below.
-cantril %>% 
+# This code is already done for you. You don't need to change anything here. If you change any of the column names, or something else with the data, you may need to adjust the code below.
+
+# Make boundaries light grey
+l <- list(color = toRGB("grey"), width = 0.5)
+
+# Specify map projection/options
+g <- list(
+  showframe = FALSE,
+  coastlinecolor = "grey", # Set coastline color
+  coastlinewidth = 0.5, # Set coastline width
+  projection = list(type = 'Mercator')
+)
+
+# Create choropleth map
+cantril %>%
   mutate(`Cantril ladder score` = round(`Cantril ladder score`, 2)) %>%
-  plotly::plot_geo(width = 940) %>% 
+  plot_geo(width = 940) %>%
   add_trace(
     z = ~`Cantril ladder score`,
     color = ~`Cantril ladder score`,
+    zmin = 0, # Set minimum value for color scale
+    zmax = 10, # Set maximum value for color scale
     locations = ~Code,
     text = ~Country,
-    frame = ~Year, colors = "YlGn"
-  ) %>% 
-  colorbar(title = NULL)
+    frame = ~Year, colors = "YlGn",
+    marker = list(line = l)
+  ) %>%
+  colorbar(title = "Ladder Score",
+           tickvals = seq(0, 10, by = 2),
+           ticktext = seq(0, 10, by = 2)) %>%
+  layout(geo = g)
 ```
 
 
 ## 📈 Simple Chart
 
-CHART TO BE CREATED HERE 
-
 ```{r echo=T}
-# In this tab, create a simple line chart of the Cantril score over time for a few countries,
-# similar to the one on the Our World in Data page.
+# In this tab, create a simple line chart of the Cantril score over time for a few countries, similar to the one on the Our World in Data page.
 # Note that your chart will not have the ability to filter countries like the one on the Our World in Data page.
 
-# You should:
-# 1. Filter the cantril data to just 4 to 8 countries you want to highlight
-# 2. Use ggplot to create a line chart of the Cantril score over time, with different colors for each country
-# 3. Use geom_line to create the lines
-# 4. Use scale_y_continuous to set the y-axis limits to 0 and 10.
-# 5. Use labs to create neat labels for the chart
-# 6. Use theme_minimal to set the theme.
-# 7. Finally, use ggplotly to convert the ggplot chart to a plotly chart
+# Create line chart
+WRITE_YOUR_CODE_HERE
 ```
 
 ## 📈 Advanced Chart
@@ -148,6 +153,3 @@ window.onload = filter_default;
 Data source: World Happiness Report
 
 [OurWorldInData.org/happiness-and-life-satisfaction](https://ourworldindata.org/grapher/happiness-cantril-ladder) | CC BY
-
-
-

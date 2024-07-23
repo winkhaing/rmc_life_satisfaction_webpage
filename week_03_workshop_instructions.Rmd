@@ -1,23 +1,107 @@
 ---
-title: "Workshop Instructions"
+title: "Workshop 3 Instructions"
 subtitle: "Interactive Plots and Web Publishing with RMarkdown"
 author: "The GRAPH Courses Team"
 output: prettydoc::html_pretty
 ---
 
-## Workshop Goal
+## Introduction
 
-Our goal is to use R to replicate [this set of interactive tables and charts](https://ourworldindata.org/grapher/happiness-cantril-ladder){target="_blank"} from Our World in Data on life satisfaction.
+In this workshop, you will work on replicating the **Our World in Data** Page on the Self-reported life satisfaction data from the **Gallup World Poll**. Our World in Data creates gold-standard visualizations and data analysis. They provide a wealth of data on global trends and long-term changes.
 
-Our World in Data creates gold-standard visualizations and data analysis. They provide a wealth of data on global trends and long-term changes.
+The goal is to use R to replicate [this set of interactive tables and charts](https://ourworldindata.org/grapher/happiness-cantril-ladder){target="_blank"} from Our World in Data on life satisfaction.
+
+You can find an example of the HTML page you will create for today's workshop here
 
 ## Getting Started
 
-- Fork, then clone this repository: [https://github.com/the-graph-courses/rmc_life_satisfaction_webpage](https://github.com/the-graph-courses/rmc_life_satisfaction_webpage){target="_blank"}.
-- Open the `index.Rmd` file. This file contains the skeleton for your assignment.
-- Follow the instructions to complete the "Table" and "Simple Chart" tabs.
+Each individual will work on their own website page. This means that although you might work in a breakout room with other students, you will each perform the following steps:
+
+1.  Fork, then clone today's workshop repository to your local computer: \
+    [https://github.com/the-graph-courses/rmc_life_satisfaction_webpage](https://github.com/the-graph-courses/rmc_life_satisfaction_webpage){target="_blank"}.
+2.  Open the `index.Rmd` file. This file contains the skeleton for your assignment.
+3.  Follow the instructions on this file to complete the **"Table"** and **"Simple Chart"** tabs.
+4.  Submit the link to your deployed website on the Workshop 3 Page!
+
+## Page Structure
+
+Note that the example page is divided into **4 major tabs**:
+
+1.  Table
+
+2.  Map
+
+3.  Chart
+
+4.  Advanced (Optional)
+
+For today's workshop, you will work on creating the **Table** and **Chart** tabs of the page!
+
+## TASK 1: FORK AND CLONE THE REPO
+
+## TASK 2:  CREATE TABLE
+
+In this tab, you will create a table similar to the one on the Our World in Data page. The table should have the following columns:
+
+-   Country
+
+-   `2011`
+
+-   `2023`
+
+-   Absolute change
+
+-   Relative change
+
+To accomplish this, you should:
+
+1.  Use `select` to drop the Code column from the `cantril` data as it is not needed in the table.
+
+2.  Filter the `cantril` data frame to just the years 2011 and 2023.
+
+3.  Use the `pivot_wider` function to create the columns for 2011 and 2023.
+
+    **Hint:** You may need backticks around column names with spaces or which start with numbers.
+
+4.  Use the `mutate` function to calculate the Absolute change and Relative change.
+
+5.  Also with `mutate`, you should round your numbers to appropriate decimal places.
+
+6.  Then use scales::percent to format the Relative change as a percentage.
+
+7.  Use the `reactable` function to create and output the table.
+
+## TASK 3:  CREATE CHART
+
+In this tab, create a simple line chart of the *"Cantril Ladder"* score over time for a few countries, similar to the one on the Our World in Data page.
+
+*Note that your chart will not have the ability to filter countries like the one on the Our World in Data page.*
+
+To accomplish this, you should:
+
+1.  Filter the `cantril` data to just **4 to 8 countries** you want to highlight.
+
+2.  Use `ggplot()` to create a **line chart** of the *"Cantril Ladder"* score over time, with different colors for each country
+
+3.  Use `geom_line()` to create the lines
+
+4.  Use `scale_y_continuous()` to set the y-axis limits to 0 and 10.
+
+5.  Use labs to create neat labels for the chart.
+
+6.  Use theme_minimal to set the theme.
+
+7.  Finally, use `ggplotly()` to convert the ggplot chart to a `plotly` chart.
+
+## TASK 4: KNIT YOUR RMD INTO HTML
+
+## TASK 5: PUSH CHANGES TO GITHUB
+
+## TASK 6: DEPLOY TO GITHUB PAGES
 
 ## Submission
 
-- When finished, render your HTML, push your changes to GitHub and enable GitHub Pages for the repository. 
-- Submit the link to the deployed website (the link will probably look something like this: `https://YOUR-USERNAME.github.io/NAME_OF_YOUR_REPO/`). Make sure it works before submitting.
+-   Submit the link to the deployed website as a **text file (.txt)**.
+-   **Make sure to test the link and double check that it works before submitting!**
+-   The link will probably look something like this: \
+    `https://YOUR-USERNAME.github.io/NAME_OF_YOUR_REPO/`.
