@@ -5,23 +5,15 @@ author: "The GRAPH Courses Team"
 output: prettydoc::html_pretty
 ---
 
-## Introduction
+# Introduction
+
+## Objective
 
 In this workshop, you will work on replicating the **Our World in Data** Page on the Self-reported life satisfaction data from the **Gallup World Poll**. Our World in Data creates gold-standard visualizations and data analysis. They provide a wealth of data on global trends and long-term changes.
 
-The goal is to use R to replicate [this set of interactive tables and charts](https://ourworldindata.org/grapher/happiness-cantril-ladder){target="_blank"} from Our World in Data on life satisfaction.
+The goal is to use R to replicate [this set of interactive tables and charts](https://ourworldindata.org/grapher/happiness-cantril-ladder){target="_blank"} from Our World in Data on life satisfaction. We will use Quarto to generate a HMTL and publish it to GitHub pages.
 
-You can find an example of the HTML page you will create for today's workshop [here](https://the-graph-courses.github.io/rmc_life_satisfaction_webpage/)
-
-## Getting Started
-
-Each individual will work on their own website page. This means that although you might work in a breakout room with other students, you will each perform the following steps:
-
-1.  Fork, then clone today's workshop repository to your local computer:\
-    [https://github.com/the-graph-courses/rmc_life_satisfaction_webpage](https://github.com/the-graph-courses/rmc_life_satisfaction_webpage){target="_blank"}.
-2.  Open the `index.Rmd` file. This file contains the skeleton for your assignment.
-3.  Follow the instructions on this file to complete the **"Table"** and **"Simple Chart"** tabs.
-4.  Submit the link to your deployed website on the Workshop 3 Page!
+You can find an example of the HTML page you will create for today's workshop [here](https://the-graph-courses.github.io/rmc_life_satisfaction_webpage/).
 
 ## Page Structure
 
@@ -37,11 +29,23 @@ Note that the example page is divided into **4 major tabs**:
 
 For today's workshop, you will work on creating the **Table** and **Chart** tabs of the page!
 
-## TASK 1: FORK AND CLONE THE REPO
+# Getting Started
 
-## TASK 2: CREATE TABLE
+Each individual will work on their own website page. This means that although you might work in a breakout room with other students, you will each perform the following steps:
 
-In this tab, you will create a table similar to the one on the Our World in Data page. The table should have the following columns:
+1.  Fork today's workshop repository to create a copy on your personal GitHub account: [https://github.com/the-graph-courses/rmc_life_satisfaction_webpage](https://github.com/the-graph-courses/rmc_life_satisfaction_webpage){target="_blank"}. This step should be completed in your web browser.
+2.  Clone the workshop repository to your local computer using GitHub desktop.
+3.  Open the project file (`rmc_03_workshop.Rproj`) in RStudio.
+4.  Open and knit `week_03_instructions.Rmd` . The output HTML should now appear in your Viewer pane.
+5.  In your Files pane, navigate to the "scripts" folder and open the `index.qmd` file. This file contains the template for your assignment.
+6.  Replace every instance of `"WRITE_YOUR_CODE_HERE"` with your answers.
+7.  Refer to the instructions for guidance as you work through the assignment and fill out the **"Table"** and **"Simple Chart"** sections.
+
+# Creating the webpage
+
+## TASK 1: WRITE CODE TO CREATE TABLE
+
+In the "🔢 Table" section, you will create a table similar to the one on the Our World in Data page. The table should have the following columns:
 
 -   Country
 
@@ -55,25 +59,27 @@ In this tab, you will create a table similar to the one on the Our World in Data
 
 To accomplish this, you should:
 
-1.  Use `select` to drop the Code column from the `cantril` data as it is not needed in the table.
+1.  Filter the `cantril` data frame to just the years 2011 and 2023.
 
-2.  Filter the `cantril` data frame to just the years 2011 and 2023.
-
-3.  Use the `pivot_wider` function to create the columns for 2011 and 2023.
+2.  Use the `pivot_wider()` function to create the columns for 2011 and 2023.
 
     **Hint:** You may need back-ticks around column names with spaces or which start with numbers.
 
-4.  Use the `mutate` function to calculate the Absolute change and Relative change.
+3.  Use `select()` to drop any columns from the `cantril` data that are not needed in the table.
 
-5.  Also with `mutate`, you should round your numbers to appropriate decimal places.
+4.  Use the `mutate()` function to calculate the Absolute change and Relative change.
 
-6.  Then use scales::percent to format the Relative change as a percentage.
+    **Note**: Within `mutate()`, you should round your numbers to 2 decimal places using the `round()` function.
 
-7.  Use the `reactable` function to create and output the table.
+5.  Then use `scales::percent()` to format the Relative change as a percentage.
 
-## TASK 3: CREATE CHART
+6.  Use the `reactable()` function to create and output the table.
 
-In this tab, create a simple line chart of the *"Cantril Ladder"* score over time for a few countries, similar to the one on the Our World in Data page.
+You can then skip the "🌎 Map" section and go on to the next part.
+
+## TASK 2: WRITE CODE TO CREATE CHART
+
+In this "📈 Simple Chart" section, create a simple line chart of the *"Cantril Ladder"* score over time for a few countries, similar to the one on the Our World in Data page.
 
 *Note that your chart will not have the ability to filter countries like the one on the Our World in Data page.*
 
@@ -87,19 +93,39 @@ To accomplish this, you should:
 
 4.  Use `scale_y_continuous()` to set the y-axis limits to 0 and 10.
 
-5.  Use labs to create neat labels for the chart.
+5.  Use `labs()` to create neat labels for the chart.
 
-6.  Use theme_minimal to set the theme.
+6.  Use `theme_minimal()` to set the theme.
 
 7.  Finally, use `ggplotly()` to convert the ggplot chart to a `plotly` chart.
 
-## TASK 4: KNIT YOUR RMD INTO HTML
+## TASK 3: ADD TABS
+
+We want each section of webpage to be divided into 4 major tabs, as shown in the example webpage:
+
+1.  Table
+
+2.  Map
+
+3.  Chart
+
+4.  Advanced (Optional)
+
+Use the `.{panel-tabset}` div in your qmd to produce these tabs. Refer to prework lesson on HTML documents and Quarto if you need help on this step. See this [video](https://thegraphcourses.org/courses/rmc-q2-2024/topics/html-documents-quarto/) around 8:30.
+
+## TASK 4: RENDER YOUR `index.qmd` TO HTML
+
+Render your qmd to a HTML webpage, and check to see that your tabs look correct!
 
 ## TASK 5: PUSH CHANGES TO GITHUB
 
+Commit and push your newly rendered webpage to the remote repository.
+
 ## TASK 6: DEPLOY TO GITHUB PAGES
 
-## Submission
+Change the settings of your repo to deploy the website to GitHub pages.
+
+# Submission
 
 -   Submit the link to the deployed website as a **text file (.txt)**.
 -   **Make sure to test the link and double check that it works before submitting!**
