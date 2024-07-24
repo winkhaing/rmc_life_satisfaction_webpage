@@ -37,7 +37,7 @@ Each individual will work on their own website page. This means that although yo
 2.  Clone the workshop repository to your local computer using GitHub desktop.
 3.  Open the project file (`rmc_03_workshop.Rproj`) in RStudio.
 4.  Open and knit `week_03_instructions.Rmd` . The output HTML should now appear in your Viewer pane.
-5.  In your Files pane, navigate to the "scripts" folder and open the `index.qmd` file. This file contains the template for your assignment.
+5.  In your Files pane, open the `index.qmd` file. This file contains the template for your assignment.
 6.  Replace every instance of `"WRITE_YOUR_CODE_HERE"` with your answers.
 7.  Refer to the instructions for guidance as you work through the assignment and fill out the **"Table"** and **"Simple Chart"** sections.
 
