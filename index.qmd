@@ -1,9 +1,9 @@
 ---
 title: "Self-reported life satisfaction, 2011 to 2023"
 subtitle: "Replicating the Our World in Data Grapher"
-author: "YOUR NAME HERE" # Remember to add your name!
+author: "Win Khaing"
 date: "24-07-2024"
-theme: united
+theme: yeti
 ---
 
 <!-- Custom HTML to add logo [DO NOT EDIT THIS SECTION] -->
@@ -45,7 +45,7 @@ The main life evaluation question asked in the poll is the Cantril Life Ladder q
 
 > “Please imagine a ladder, with steps numbered from 0 at the bottom to 10 at the top. The top of the ladder represents the best possible life for you and the bottom of the ladder represents the worst possible life for you. On which step of the ladder would you say you personally feel you stand at this time?”
 
-
+:::{.panel-tabset}
 ## 🔢 Table
 
 **Average self-reported life satisfaction** – Cantril Ladder score (0=worst; 10=best)
@@ -56,11 +56,68 @@ The main life evaluation question asked in the poll is the Cantril Life Ladder q
 
 
 # Create table
+# Step 1: Filter the data for years 2011 and 2023
+cantril_filtered <- cantril %>%
+  filter(Year %in% c(2011, 2023))
 
-"WRITE_YOUR_CODE_HERE"
+# filtered_data <- cantril[cantril$Year %in% c(2011, 2023), ]
+
+# Step 2: Pivot the data wider
+cantril_wide <- cantril_filtered %>%
+  pivot_wider(
+    names_from = Year,
+    values_from = `Cantril ladder score`,
+    names_prefix = "score_"
+  )
+
+# Step 3: Select required columns
+cantril_selected <- cantril_wide %>%
+  select(Country, score_2011, score_2023)
+
+# Step 4 & 5: Calculate Absolute and Relative change
+cantril_calculated <- cantril_selected %>%
+  mutate(
+    absolute_change = score_2023 - score_2011,
+    relative_change = (score_2023 - score_2011) / score_2011 * 100
+  )
+
+# Step 6: Create the reactable
+reactable(
+  cantril_calculated  %>% 
+  select(Country, score_2011, score_2023, absolute_change, relative_change) %>%
+    arrange(desc(absolute_change)),
+  columns = list(
+    Country = colDef(name = "Country", minWidth = 150),
+    score_2011 = colDef(name = "2011 Score", format = colFormat(digits = 2)),
+    score_2023 = colDef(name = "2023 Score", format = colFormat(digits = 2)),
+    absolute_change = colDef(
+      name = "Absolute Change",
+      format = colFormat(digits = 2),
+      style = function(value) {
+        if (is.na(value)) return(NULL)
+        color <- if (value > 0) "green" else if (value < 0) "red" else "black"
+        list(color = color, fontWeight = "bold")
+      }
+    ),
+    relative_change = colDef(
+      name = "Relative Change (%)",
+      format = colFormat(digits = 2, suffix = "%"),
+      style = function(value) {
+        if (is.na(value)) return(NULL)
+        color <- if (value > 0) "green" else if (value < 0) "red" else "black"
+        list(color = color, fontWeight = "bold")
+      }
+    )
+  ),
+  defaultSorted = "absolute_change",
+  defaultSortOrder = "desc",
+  filterable = TRUE,
+  searchable = TRUE,
+  striped = TRUE,
+  highlight = TRUE,
+  bordered = TRUE
+)
 ```
-
-
 ## 🌎 Map
 
 The map plots the average answer that survey respondents provided to this question in different countries. As with the steps of the ladder, values in the map range from 0 to 10.
@@ -107,7 +164,55 @@ cantril %>%
 # Note that your chart will not have the ability to filter countries like the one on the Our World in Data page.
 
 # Create line chart
-"WRITE_YOUR_CODE_HERE"
+
+# Step 1: Filter the data for 6 selected countries
+selected_countries <- c("United States", "China", "India", "Brazil", "Germany", "Nigeria")
+
+filtered_data <- cantril %>%
+  filter(Country %in% selected_countries)
+
+# Step 2-6: Create the ggplot chart
+p <- ggplot(filtered_data, aes(x = Year, y = `Cantril ladder score`, color = Country)) +
+  geom_line(size = 1) +  # Step 3: Use geom_line()
+  scale_y_continuous(limits = c(0, 10)) +  # Step 4: Set y-axis limits
+  labs(title = "Cantril Ladder Score Over Time",
+       x = "Year",
+       y = "Cantril Ladder Score",
+       color = "Country") +  # Step 5: Create neat labels
+  theme_minimal() +  # Step 6: Set the theme
+  theme(legend.position = "bottom")
+
+# Step 7: Convert ggplot to plotly
+ggplotly(p)
+
+
+p <- ggplot(filtered_data, aes(x = Year, y = `Cantril ladder score`, color = Country)) +
+  geom_line(size = 1.2) +
+  geom_point(size = 2) +
+  scale_y_continuous(limits = c(2, 8), breaks = seq(2, 8, 1)) +
+  scale_x_continuous(breaks = seq(2011, 2023, 2)) +
+  labs(title = "Self-reported life satisfaction",
+       subtitle = "Average of survey responses to the 'Cantril Ladder' question in the Gallup World Poll",
+       x = "",
+       y = "Cantril ladder score (0-10)",
+       color = "") +
+  theme_minimal() +
+  theme(
+    legend.position = "right",
+    plot.title = element_text(face = "bold", size = 16),
+    plot.subtitle = element_text(size = 10),
+    axis.title.y = element_text(size = 10),
+    legend.text = element_text(size = 10),
+    panel.grid.minor = element_blank()
+  ) +
+  scale_color_brewer(palette = "Set2")
+
+# Step 7: Convert ggplot to plotly
+ggplotly(p, tooltip = c("Entity", "Year", "Cantril ladder score")) %>%
+  layout(
+    hovermode = "x unified",
+    legend = list(orientation = "v", x = 1.02, y = 0.5)
+  )
 ```
 
 ## 📈 Advanced Chart
@@ -150,7 +255,7 @@ bscols(
   list(country_filter, cantril_plotly)
 )
 ```
-
+:::
 <!-- Custom javascript to set default values in the filter: -->
 <script>
 function filter_default() {
